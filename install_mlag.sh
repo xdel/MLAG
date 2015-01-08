@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 SCRIPT_PATH="${BASH_SOURCE[0]}";
 if ([ -h "${SCRIPT_PATH}" ]) then
   while([ -h "${SCRIPT_PATH}" ]) do SCRIPT_PATH=`readlink "${SCRIPT_PATH}"`; done
@@ -16,7 +16,7 @@ git clone https://github.com/open-ethernet/OES $SCRIPT_PATH/../OES
 ## Install mlnx_lib
 cd $SCRIPT_PATH/../mlnx_lib
 ./autogen.sh
-./configure --with-oes=$SCRIPT_PATH/../OES
+./configure --with-oes=$SCRIPT_PATH/../OES CXXFLAGS=-I$SCRIPT_PATH/../mlnx_lib/sx_complib/include/
 cd sx_complib
 ./autogen.sh
 ./configure
